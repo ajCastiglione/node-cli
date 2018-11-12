@@ -27,6 +27,12 @@ app.get('/', (req, res) => {
   res.send({
     default: 'This is your home page'
   });
+}); 
+
+app.post('/secured-route', authenticate, (req, res) => {
+  res.send({
+    msg: 'This is an example of a protected route using JWT authentication. The authenticated method checks for the headers, then for x-auth, then verifies the token.'
+  });
 }); \n
 
 app.listen(port, () => console.log('Server is running on port ' + port));
