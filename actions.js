@@ -2,6 +2,7 @@ const npm = require("npm");
 const fs = require("fs");
 const { expressApp } = require("./appCode/express-code");
 const { auth } = require("./appCode/middleware-code");
+const { initCode } = require("./appCode/packageJson-code");
 
 const createFiles = () => {
   try {
@@ -12,6 +13,7 @@ const createFiles = () => {
     return console.log(`Cannot created directory, ${e}.`);
   }
   try {
+    fs.writeFileSync("package.json", initCode);
     fs.writeFileSync("server/server.js", expressApp);
     fs.writeFileSync("server/middleware/authenticate.js", auth);
     fs.writeFileSync("server/config/config.js", "");
