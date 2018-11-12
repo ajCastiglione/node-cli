@@ -1,5 +1,5 @@
 {
-  "name": "cli-node-express-app",
+  "name": "node-cli",
   "version": "1.0.0",
   "description": "CLI for generating node/express app",
   "main": "app.js",
@@ -10,8 +10,7 @@
   },
   "keywords": [
     "cli",
-    "node",
-    "express"
+    "node"
   ],
   "author": "AJ Castiglione",
   "license": "ISC",
