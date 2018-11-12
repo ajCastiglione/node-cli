@@ -1,6 +1,6 @@
 const program = require("commander");
-const fs = require("fs");
-const code = require("./express-code");
+const { createFiles } = require("./actions");
+const { testFunc } = require("./test");
 
 program
   .version("1.0.0")
@@ -12,18 +12,16 @@ program
   .description("Generate node / express application")
   .action(() => {
     console.info("Generating express app...");
-    let exp = code.expressApp;
-    try {
-      fs.mkdirSync("temp");
-    } catch (e) {
-      return console.log("Cannot created directory, it already exists.");
-    }
-    try {
-      fs.writeFileSync("temp/server.js", exp);
-    } catch (e) {
-      return console.log(`Cannot create file: ${e}`);
-    }
+    createFiles();
     console.info("Successfully created express app");
+  });
+
+program
+  .command("test")
+  .alias("t")
+  .description("Testing npm usage inside node program")
+  .action(() => {
+    testFunc();
   });
 
 program.parse(process.argv);
