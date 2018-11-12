@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require("commander");
 const { createFiles, installModules } = require("./actions");
 
@@ -8,7 +10,7 @@ program
 program
   .command("express")
   .alias("e")
-  .description("Generate node / express application")
+  .description("Generate node / express application with JWT")
   .action(() => {
     console.info("Generating express app...");
     createFiles();
