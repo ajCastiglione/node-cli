@@ -1,6 +1,5 @@
 const program = require("commander");
-const { createFiles } = require("./actions");
-const { testFunc } = require("./test");
+const { createFiles, installModules } = require("./actions");
 
 program
   .version("1.0.0")
@@ -13,15 +12,9 @@ program
   .action(() => {
     console.info("Generating express app...");
     createFiles();
-    console.info("Successfully created express app");
-  });
-
-program
-  .command("test")
-  .alias("t")
-  .description("Testing npm usage inside node program")
-  .action(() => {
-    testFunc();
+    console.info("Successfully created express files");
+    console.info("Downloading dependencies...");
+    installModules();
   });
 
 program.parse(process.argv);
