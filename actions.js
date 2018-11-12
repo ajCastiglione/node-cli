@@ -1,30 +1,37 @@
+const npm = require("npm");
 const fs = require("fs");
-const { expressApp } = require("./express-code");
+const { expressApp } = require("./appCode/express-code");
+const { auth } = require("./appCode/middleware-code");
 
 const createFiles = () => {
   try {
-    fs.mkdirSync("temp");
+    fs.mkdirSync("server");
+    fs.mkdirSync("server/middleware");
+    fs.mkdirSync("server/config");
   } catch (e) {
-    return console.log("Cannot created directory, it already exists.");
+    return console.log(`Cannot created directory, ${e}.`);
   }
   try {
-    fs.writeFileSync("temp/server.js", expressApp);
+    fs.writeFileSync("server/server.js", expressApp);
+    fs.writeFileSync("server/middleware/authenticate.js", auth);
+    fs.writeFileSync("server/config/config.js", "");
   } catch (e) {
     return console.log(`Cannot create file: ${e}`);
   }
 };
 
-const npm = require("npm");
-
-const testFunc = () => {
+const installModules = () => {
   npm.load(function(err) {
     // handle errors
     if (err) return console.log(err);
     // install module ffi
-    npm.commands.install(["express"], function(er, data) {
+    npm.commands.install(["express", "jsonwebtoken", "body-parser"], function(
+      er,
+      data
+    ) {
       // log errors or data
       if (er) return console.log("Error " + er);
-      console.info("Successfully installed Express");
+      console.info("Successfully installed dependencies");
     });
 
     npm.on("log", function(message) {
@@ -36,5 +43,5 @@ const testFunc = () => {
 
 module.exports = {
   createFiles,
-  testFunc
+  installModules
 };
