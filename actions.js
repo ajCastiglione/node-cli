@@ -4,25 +4,31 @@ const { expressApp } = require("./appCode/express-code");
 const { auth } = require("./appCode/middleware-code");
 const { initCode } = require("./appCode/packageJson-code");
 
-const createFiles = () => {
+const createFiles = dir => {
   try {
-    fs.mkdirSync("server");
-    fs.mkdirSync("server/middleware");
-    fs.mkdirSync("server/config");
+    fs.mkdirSync(dir + "/server");
+    fs.mkdirSync(dir + "/server/middleware");
+    fs.mkdirSync(dir + "/server/config");
   } catch (e) {
     return console.log(`Cannot created directory, ${e}.`);
   }
   try {
-    fs.writeFileSync("package.json", initCode);
-    fs.writeFileSync("server/server.js", expressApp);
-    fs.writeFileSync("server/middleware/authenticate.js", auth);
-    fs.writeFileSync("server/config/config.js", "");
+    fs.writeFileSync(dir + "/package.json", initCode);
+    fs.writeFileSync(dir + "/server/server.js", expressApp);
+    fs.writeFileSync(dir + "/server/middleware/authenticate.js", auth);
+    fs.writeFileSync(dir + "/server/config/config.js", "");
   } catch (e) {
     return console.log(`Cannot create file: ${e}`);
   }
 };
 
-const installModules = () => {
+const installModules = dir => {
+  try {
+    process.chdir(dir);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
   npm.load(function(err) {
     // handle errors
     if (err) return console.log(err);
