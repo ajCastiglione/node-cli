@@ -1,5 +1,5 @@
 const initCode = `{
-  "name": "expressApp",
+  "name": "express-app",
   "version": "1.0.0",
   "description": "Stater kit for Express Apps",
   "main": "server/server.js",
