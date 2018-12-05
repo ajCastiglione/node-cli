@@ -1,6 +1,6 @@
 const initCode = `{
-  "name": "express_app",
-  "version": "1.0",
+  "name": "expressApp",
+  "version": "1.0.0",
   "description": "Stater kit for Express Apps",
   "main": "server/server.js",
   "scripts": {
@@ -9,7 +9,7 @@ const initCode = `{
   },
   "keywords": [],
   "author": "AJ Castiglione",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {}
 }
 `;
